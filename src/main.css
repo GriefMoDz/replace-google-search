@@ -1,0 +1,19 @@
+.rgs-settings-revert-icon {
+  margin-left: 2px;
+  display: inline-block;
+  color: var(--text-brand);
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.rgs-settings-action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+}
+
+.rgs-settings-visibility-container {
+  column-count: 2;
+  column-gap: 3rem;
+}

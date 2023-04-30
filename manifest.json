@@ -1,0 +1,18 @@
+{
+  "id": "xyz.griefmodz.ReplaceGoogleSearch",
+  "name": "Replace Google Search",
+  "description": "A Replugged plug-in that has been ported from BetterDiscord which replaces the Google text search with a handful of custom search engines.",
+  "author": {
+    "name": "M'Harley",
+    "discordID": "350227339784880130",
+    "github": "griefmodz"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "github",
+    "id": "griefmodz/replace-google-search"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx"
+}
