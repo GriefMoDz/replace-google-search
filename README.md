@@ -3,7 +3,7 @@ This is a Replugged plug-in that has been ported from BetterDiscord which replac
 
 ![License: MIT](https://img.shields.io/github/license/griefmodz/replace-google-search?color=3ba55c&style=for-the-badge)
 ![Total Downloads](https://img.shields.io/github/downloads/griefmodz/replace-google-search/total?color=3ba55c&style=for-the-badge)
-[![Install in Replugged](https://img.shields.io/badge/Quick%20Install-via%20RPC-3ba55c?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=griefmodz/replace-google-search&source=github)
+[![Install in Replugged](https://img.shields.io/badge/Quick%20Install-via%20RPC-3ba55c?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=xyz.griefmodz.ReplaceGoogleSearch)
 
 ## Features
 
