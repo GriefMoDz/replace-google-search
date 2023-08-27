@@ -1,14 +1,29 @@
 import type { AnyFunction, ModuleExports } from 'replugged/dist/types';
+import type { Store } from 'replugged/dist/renderer/modules/common/flux';
+
+type Comparator<T> = (a: T, b: T) => boolean;
+
+type UseStateFromStores = <T>(stores: Store[], callback: () => T, deps?: React.DependencyList, compare?: Comparator<T>) => T;
 
 type SearchEngine = keyof SearchEngineSettings;
 
 type SearchWithGoogleModule = ModuleExports & {
   exports: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    default: (args: any, res: React.ReactElement) => React.ReactElement;
-    Z: AnyFunction;
+    [key: string]: AnyFunction;
   };
 };
+
+interface PopoutWindowStore extends Store {
+  getWindow: (windowKey: string) => Window;
+  getIsAlwaysOnTop: (windowKey: string) => boolean;
+}
+
+interface PopoutWindowProps {
+  withTitleBar?: boolean;
+  windowKey: string;
+  title?: string;
+  children?: React.ReactNode;
+}
 
 interface SearchEngineSettings {
   ask?: boolean;
@@ -35,5 +50,6 @@ interface SearchEngineSettings {
 
 interface RGSSettings extends SearchEngineSettings {
   hideIcons?: boolean;
+  forcePopoutWindow?: boolean;
   preferred?: SearchEngine | '';
 }

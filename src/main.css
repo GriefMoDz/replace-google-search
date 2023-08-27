@@ -17,3 +17,66 @@
   column-count: 2;
   column-gap: 3rem;
 }
+
+.rgs-popout-header-inner {
+  flex: 1 0 auto;
+}
+
+.rgs-popout-title {
+  width: 0;
+  flex: 1 1 auto;
+  margin-left: 5px;
+  position: relative;
+}
+
+.rgs-popout-title-text {
+  background-color: var(--background-accent);
+  padding: 5px 10px;
+  border-radius: 10px;
+
+  overflow-x: scroll;
+  user-select: text;
+}
+
+.rgs-popout-title-text::-webkit-scrollbar {
+  display: none;
+}
+
+.rgs-unsupported-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-500);
+  flex-direction: column;
+}
+
+.rgs-unsupported-container-title {
+  max-width: 75%;
+  font-weight: 700;
+  margin: 8px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rgs-unsupported-container-title .emoji {
+  width: 30px;
+  height: 40px;
+}
+
+.rgs-unsupported-container-button {
+  margin-top: 24px;
+  border-radius: 999px;
+}
+
+.rgs-unsupported-container-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.rgs-engine-context-menu {
+  max-height: 350px;
+}

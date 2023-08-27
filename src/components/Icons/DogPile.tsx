@@ -1,4 +1,4 @@
-const SVGComponent = (props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>): React.ReactElement => (
+const SVGComponent = (props: React.SVGProps<SVGSVGElement>): React.ReactElement => (
   <svg xmlns='http://www.w3.org/2000/svg' width={24} height={24} viewBox='0 0 32 32' {...props}>
     <circle fill='#84d3f0' cx={12.78} cy={2.95} r={2.81} />
     <circle fill='#84d3f0' cx={19.78} cy={3.81} r={2.79} />

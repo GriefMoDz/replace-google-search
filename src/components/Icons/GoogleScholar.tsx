@@ -1,4 +1,4 @@
-const SVGComponent = (props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>): React.ReactElement => (
+const SVGComponent = (props: React.SVGProps<SVGSVGElement>): React.ReactElement => (
   <svg xmlns='http://www.w3.org/2000/svg' width={24} height={24} viewBox='0 0 32 32' {...props}>
     <path fill='#4285f4' d='M16 25.695 0 12.668 16 0Zm0 0' />
     <path fill='#356ac3' d='m16 25.695 16-13.027L16 0Zm0 0' />

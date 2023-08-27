@@ -12,7 +12,7 @@ This is a Replugged plug-in that has been ported from BetterDiscord which replac
 - Icons shown next to each search engine to help you easily narrow down the one you want.
 
 ## Planned Features
-- [ ] Open links in-app under a separate window
+- [x] Open links in-app under a separate window
 
 ## Available Search Engines
 

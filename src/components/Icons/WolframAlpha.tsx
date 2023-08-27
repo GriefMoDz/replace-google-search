@@ -1,4 +1,4 @@
-const SVGComponent = (props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>): React.ReactElement => (
+const SVGComponent = (props: React.SVGProps<SVGSVGElement>): React.ReactElement => (
   <svg xmlns='http://www.w3.org/2000/svg' width={24} height={24} viewBox='0 0 32 32' {...props}>
     <g strokeWidth={0.063} fill='none'>
       <path stroke='#e16565' vectorEffect='non-scaling-stroke' d='m18.893 7.313-2.771 3.594' />

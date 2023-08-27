@@ -1,6 +1,9 @@
 {
+  "RGS_CHANGE_SEARCH_ENGINE": "Change Search Engine",
   "RGS_DISABLE_ALL": "Disable All",
   "RGS_ENABLE_ALL": "Enable All",
+  "RGS_FORCE_POPOUT_WINDOW": "Force Popout Window",
+  "RGS_FORCE_POPOUT_WINDOW_NOTE": "Menu items will open within a popout window instead of your web browser.",
   "RGS_HIDE_ICONS": "Hide Icons",
   "RGS_HIDE_ICONS_NOTE": "Removes the search engine icon(s) shown next to the menu item(s).",
   "RGS_PREFERRED_SEARCH_ENGINE": "Preferred Search Engine",
@@ -8,5 +11,7 @@
   "RGS_SEARCH_WITH": "Search with...",
   "RGS_SEARCH_WITH_ENGINE": "Search with **{engine}**",
   "RGS_SHOW_ENGINE": "Show {engine}",
+  "RGS_UNSUPPORTED_SEARCH_ENGINE_SUB_TEXT": "This search engine is currently unsupported for use in a window popout.",
+  "RGS_UNSUPPORTED_SEARCH_ENGINE_TITLE": "Unsupported... :disappointed:",
   "RGS_VISIBILITY": "Visibility"
 }

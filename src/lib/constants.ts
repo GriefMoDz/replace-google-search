@@ -1,10 +1,12 @@
 import { RGSSettings } from '@types';
 
+export const POPOUT_WINDOW_ID = 'DISCORD_REPLUGGED_RGS_LINK';
+
 export const SEARCH_ENGINES: Record<string, string> = {
   ASK: 'https://ask.com/web?q=',
   BING: 'https://www.bing.com/search?q=',
   BRAVE: 'https://search.brave.com/search?q=',
-  DOGPILE: 'http://www.dogpile.com/search/web?q=',
+  DOGPILE: 'https://www.dogpile.com/search/web?q=',
   DUCKDUCKGO: 'https://duckduckgo.com/?q=',
   ECOSIA: 'https://www.ecosia.org/search?q=',
   GITHUB: 'https://github.com/search?q=',
@@ -70,6 +72,7 @@ export const DefaultSettings: Partial<RGSSettings> = {
   youtube: false,
 
   /* Other */
+  forcePopoutWindow: false,
   hideIcons: false,
   preferred: ''
 };
