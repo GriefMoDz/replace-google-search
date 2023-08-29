@@ -17,7 +17,7 @@ const BetaTag: React.FunctionComponent<{ className?: string }> = webpack.getBySo
 const BetaTagClasses: {
   betaTagIcon: string;
   betaTagContainer: string;
-} = webpack.getByProps('betaTagIcon', 'betaTagContainer')!;
+} = await webpack.waitForProps('betaTagIcon', 'betaTagContainer')!;
 
 function EngineSettings(): React.ReactElement[] {
   const items: React.ReactElement[] = [];
@@ -145,9 +145,9 @@ function Settings(): React.ReactElement {
         {Messages.RGS_HIDE_ICONS}
       </SwitchItem>
       <SwitchItem {...usePopoutWindow} note={Messages.RGS_FORCE_POPOUT_WINDOW_NOTE}>
-        <div className={BetaTagClasses.betaTagContainer}>
+        <div className={BetaTagClasses?.betaTagContainer}>
           {Messages.RGS_FORCE_POPOUT_WINDOW}
-          <BetaTag className={BetaTagClasses.betaTagIcon} />
+          <BetaTag className={BetaTagClasses?.betaTagIcon} />
         </div>
       </SwitchItem>
     </React.Fragment>
