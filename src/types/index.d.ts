@@ -1,10 +1,6 @@
 import type { AnyFunction, ModuleExports } from 'replugged/dist/types';
 import type { Store } from 'replugged/dist/renderer/modules/common/flux';
 
-type Comparator<T> = (a: T, b: T) => boolean;
-
-type UseStateFromStores = <T>(stores: Store[], callback: () => T, deps?: React.DependencyList, compare?: Comparator<T>) => T;
-
 type SearchEngine = keyof SearchEngineSettings;
 
 type SearchWithGoogleModule = ModuleExports & {

@@ -5,9 +5,16 @@ import { common, webpack } from 'replugged';
 const { React } = common;
 
 const PopoutWindowStore = webpack.getByStoreName<PopoutWindowStore>('PopoutWindowStore')!;
-const PopoutWindow: React.ForwardRefExoticComponent<PopoutWindowProps> = await webpack.waitForModule(
-  webpack.filters.bySource(/defaultProps={withTitleBar:!0/)
-);
+
+async function getPopoutWindowComponent(): Promise<React.ForwardRefExoticComponent<PopoutWindowProps>> {
+  const PopoutWindow: React.ForwardRefExoticComponent<PopoutWindowProps> = await webpack.waitForModule(
+    webpack.filters.bySource(/defaultProps={withTitleBar:!0/)
+  );
+
+  return PopoutWindow;
+}
+
+let PopoutWindow: React.ForwardRefExoticComponent<PopoutWindowProps>;
 
 /**
  * This component is used to create a custom popout window.
@@ -17,7 +24,17 @@ const PopoutWindow: React.ForwardRefExoticComponent<PopoutWindowProps> = await w
  * @returns PopoutWindow
  */
 export const CustomPopoutWindow = React.memo((props: PopoutWindowProps) => {
+  const [_, forceUpdate] = React.useState({});
+
   React.useEffect(() => {
+    if (!PopoutWindow) {
+      void getPopoutWindowComponent().then((component) => {
+        PopoutWindow = component;
+
+        forceUpdate({});
+      });
+    }
+
     const guestWindow = PopoutWindowStore.getWindow(props.windowKey);
     if (guestWindow) {
       // Apply all Replugged styles to the guest window
@@ -35,7 +52,7 @@ export const CustomPopoutWindow = React.memo((props: PopoutWindowProps) => {
     props.withTitleBar = true;
   }
 
-  return <PopoutWindow {...props} />;
+  return PopoutWindow && <PopoutWindow {...props} />;
 });
 
-export default PopoutWindow;
+export default await getPopoutWindowComponent();

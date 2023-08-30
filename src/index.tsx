@@ -12,7 +12,7 @@ const { ContextMenu } = components;
 
 export const prefs = await settings.init<RGSSettings, keyof typeof DefaultSettings>('xyz.griefmodz.ReplaceGoogleSearch', DefaultSettings);
 
-const logger = Logger.plugin('ReplaceGoogleSearch', '#3ba55c');
+export const logger = Logger.plugin('ReplaceGoogleSearch', '#3ba55c');
 const inject = new Injector();
 
 export { Settings } from '@components';

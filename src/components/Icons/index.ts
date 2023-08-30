@@ -1,4 +1,5 @@
 import { common } from 'replugged';
+import { logger } from '../../index';
 
 const { lodash: Lodash, React } = common;
 
@@ -52,9 +53,15 @@ const Icons = {
   YouTube
 } as Record<string, React.FC<{ 'data-theme'?: string }>>;
 
-export function Icon(props: React.SVGProps<SVGElement> & { name: string }): React.ReactElement {
+export function Icon(props: React.SVGProps<SVGElement> & { name: string }): React.ReactElement | null {
   const Icon = Icons[Object.keys(Icons).find((key) => key.toLowerCase() === props.name.replace(/_|-| /g, '').toLowerCase())!];
   const theme = document.querySelector('html[class*=theme-dark]') ? 'dark' : 'light';
+
+  if (!Icon) {
+    logger.error(`Icon “${props.name}” not found; skipping`);
+
+    return null;
+  }
 
   return React.createElement(Icon, {
     'data-theme': theme,

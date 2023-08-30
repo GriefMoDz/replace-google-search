@@ -1,5 +1,5 @@
-import type { ModuleExportsWithProps, ObjectExports } from 'replugged/dist/types';
-import type { PopoutWindowStore, SearchEngine, UseStateFromStores } from '@types';
+import type { ModuleExportsWithProps } from 'replugged/dist/types';
+import type { PopoutWindowStore, SearchEngine } from '@types';
 
 import { POPOUT_WINDOW_ID, PRETTY_SEARCH_ENGINES, SEARCH_ENGINES } from './constants';
 import { common, components, webpack } from 'replugged';
@@ -7,7 +7,7 @@ import { Icon, Icons } from '@components';
 import { prefs } from '@index';
 
 const { Button, ContextMenu, ErrorBoundary, Loader, Text } = components;
-const { lodash: Lodash, parser, React } = common;
+const { flux, lodash: Lodash, parser, React } = common;
 const { Messages } = common.i18n;
 
 import PopoutManager from './popout';
@@ -30,9 +30,6 @@ const HeaderBarContainer = webpack.getByProps(['Title', 'Divider'], { all: true 
 
 const PopoutWindowStore = webpack.getByStoreName<PopoutWindowStore>('PopoutWindowStore')!;
 
-const useStateFromStoresMod = await webpack.waitForModule<ObjectExports>(webpack.filters.bySource('useStateFromStores'));
-const useStateFromStores: UseStateFromStores = webpack.getFunctionBySource(useStateFromStoresMod, 'useStateFromStores')!;
-
 const { DiscordNative } = window as Window &
   typeof globalThis & {
     DiscordNative: {
@@ -52,16 +49,13 @@ const IFrameLoader = (props: { engine: string; url: string }): React.ReactElemen
 
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
 
-  const { guestWindow, alwaysOnTop } = useStateFromStores(
+  const [guestWindow, alwaysOnTop] = flux.useStateFromStores(
     [PopoutWindowStore],
-    () => ({
-      guestWindow: PopoutWindowStore.getWindow(POPOUT_WINDOW_ID),
-      alwaysOnTop: PopoutWindowStore.getIsAlwaysOnTop(POPOUT_WINDOW_ID)
-    }),
+    () => [PopoutWindowStore.getWindow(POPOUT_WINDOW_ID), PopoutWindowStore.getIsAlwaysOnTop(POPOUT_WINDOW_ID)],
     [],
     (
-      oldState: { guestWindow: Window | null; alwaysOnTop: boolean },
-      newState: { guestWindow: Window | null; alwaysOnTop: boolean },
+      oldState: [] | [guestWindow: Window, alwaysOnTop: boolean],
+      newState: [] | [guestWindow: Window, alwaysOnTop: boolean],
       dependencies?: string[]
     ): boolean => {
       if (oldState === newState) {
@@ -76,14 +70,14 @@ const IFrameLoader = (props: { engine: string; url: string }): React.ReactElemen
       }
 
       for (let index = 0; index < oldKeys.length; index++) {
-        let key = oldKeys[index] as keyof typeof oldState;
-        if (oldState[key] !== newState[key] && !dependencies?.includes(key)) {
+        let key = oldKeys[index];
+        if (oldState[index] !== newState[index] && !dependencies?.includes(key)) {
           return false;
         }
       }
 
-      if (oldState.guestWindow?.document.title === newState.guestWindow?.document.title) {
-        setEngine(newState.guestWindow?.document.title.split(' | ')?.[1] ?? engine);
+      if (oldState[0]?.document.title === newState[0]?.document.title) {
+        setEngine(newState[0]?.document.title.split(' | ')?.[1] ?? engine);
 
         return true;
       }

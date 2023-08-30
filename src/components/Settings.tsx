@@ -13,12 +13,6 @@ const { Messages } = common.i18n;
 
 const states = new Map<string, boolean>();
 
-const BetaTag: React.FunctionComponent<{ className?: string }> = webpack.getBySource('Messages.BETA')!;
-const BetaTagClasses: {
-  betaTagIcon: string;
-  betaTagContainer: string;
-} = await webpack.waitForProps('betaTagIcon', 'betaTagContainer')!;
-
 function EngineSettings(): React.ReactElement[] {
   const items: React.ReactElement[] = [];
   const [_, forceUpdate] = React.useState({});
@@ -89,6 +83,12 @@ function ActionButtons({ onReset }: { onReset: (action?: 'enable' | 'disable') =
 
 const marginBottom15 = Object.freeze({ marginBottom: 15 });
 
+let BetaTag: React.FunctionComponent<{ className?: string }>;
+let BetaTagClasses: {
+  betaTagIcon: string;
+  betaTagContainer: string;
+};
+
 function Settings(): React.ReactElement {
   const [_, forceUpdate] = React.useState({});
 
@@ -98,6 +98,19 @@ function Settings(): React.ReactElement {
 
   const defaultEngine = usePreferredEngine.value;
   const enabledEngines = getEnabledEngines();
+
+  React.useEffect(() => {
+    const getBetaTag = async (): Promise<void> => {
+      BetaTag = await webpack.waitForModule<React.FunctionComponent<{ className?: string }>>(webpack.filters.bySource('Messages.BETA'));
+      BetaTagClasses = await webpack.waitForProps('betaTagIcon', 'betaTagContainer');
+
+      forceUpdate({});
+    };
+
+    if (!BetaTag || !BetaTagClasses) {
+      void getBetaTag();
+    }
+  }, []);
 
   const handleVisibilityReset = React.useCallback(
     (action?: 'enable' | 'disable'): void => {
@@ -147,7 +160,7 @@ function Settings(): React.ReactElement {
       <SwitchItem {...usePopoutWindow} note={Messages.RGS_FORCE_POPOUT_WINDOW_NOTE}>
         <div className={BetaTagClasses?.betaTagContainer}>
           {Messages.RGS_FORCE_POPOUT_WINDOW}
-          <BetaTag className={BetaTagClasses?.betaTagIcon} />
+          {BetaTag && <BetaTag className={BetaTagClasses?.betaTagIcon} />}
         </div>
       </SwitchItem>
     </React.Fragment>
